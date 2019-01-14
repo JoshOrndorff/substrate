@@ -13,6 +13,7 @@ runtime_support = { package = "srml-support", path = "../../../../srml/support",
 runtime_primitives = { package = "sr-primitives", path = "../../../sr-primitives", default-features = false }
 sr-version = { path = "../../../sr-version", default-features = false }
 runtime_io = { package = "sr-io", path = "../../../sr-io", default-features = false }
+rstd = { package = "sr-std", path = "../../../sr-std", default-features = false }
 
 [features]
 default = ["std"]
@@ -24,4 +25,5 @@ std = [
 	"runtime_primitives/std",
 	"sr-version/std",
 	"runtime_io/std",
+	"rstd/std"
 ]
