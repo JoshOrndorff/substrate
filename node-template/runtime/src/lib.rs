@@ -30,6 +30,8 @@ pub use runtime_primitives::BuildStorage;
 pub use consensus::Call as ConsensusCall;
 pub use timestamp::Call as TimestampCall;
 pub use balances::Call as BalancesCall;
+// Joshy trying to add democracy to node template
+pub use democracy::Call as DemocracyCall; // How necessary is this one?
 pub use runtime_primitives::{Permill, Perbill};
 pub use timestamp::BlockPeriod;
 pub use support::{StorageValue, construct_runtime};
@@ -56,6 +58,8 @@ pub type BlockNumber = u64;
 pub type Nonce = u64;
 
 /// Used for the module template in `./template.rs`
+// I guess we only have to "use" modules like template or substrate kitties that are
+// in some sense, written "nearby" because the other SRML ones were mentioned in Cargo.toml?
 mod template;
 
 /// Opaque types. These are used by the CLI to instantiate machinery that don't need to know
@@ -187,6 +191,15 @@ impl sudo::Trait for Runtime {
 	type Proposal = Call;
 }
 
+// Joshy trying to add democracy to node template
+// You can see which things ( <- vocab?) have to be included here by checking
+// srml/democracy/src/lib.rs
+impl democracy::Trait for Runtime {
+    type Currency = balances::Module<Self>;  // This is what they did in the full node
+    type Proposal = Call; // Copied from all the other impls
+    type Event = Event;   // Copied from all the other impls
+}
+
 /// Used for the module template in `./template.rs`
 impl template::Trait for Runtime {
 	type Event = Event;
@@ -205,6 +218,8 @@ construct_runtime!(
 		Indices: indices,
 		Balances: balances,
 		Sudo: sudo,
+        // Joshy trying to add democracy to node template
+        Democracy: democracy,
 		// Used for the module template in `./template.rs`
 		TemplateModule: template::{Module, Call, Storage, Event<T>},
 	}

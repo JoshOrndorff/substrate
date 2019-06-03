@@ -27,6 +27,8 @@ consensus-aura = { package = "substrate-consensus-aura-primitives", path = "../.
 offchain-primitives = { package = "substrate-offchain-primitives", path = "../../core/offchain/primitives", default-features = false }
 consensus_authorities = { package = "substrate-consensus-authorities", path = "../../core/consensus/authorities", default-features = false }
 
+democracy = { package = "srml-democracy", path = "../../srml/democracy", default_features = false}
+
 [features]
 default = ["std"]
 std = [
@@ -49,4 +51,5 @@ std = [
 	"safe-mix/std",
 	"consensus-aura/std",
 	"offchain-primitives/std",
+  "democracy/std",
 ]

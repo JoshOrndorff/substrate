@@ -1,7 +1,7 @@
 use primitives::{ed25519, sr25519, Pair};
 use node_template_runtime::{
 	AccountId, GenesisConfig, ConsensusConfig, TimestampConfig, BalancesConfig,
-	SudoConfig, IndicesConfig,
+	SudoConfig, IndicesConfig, DemocracyConfig,
 };
 use substrate_service;
 
@@ -115,5 +115,25 @@ fn testnet_genesis(initial_authorities: Vec<AuthorityId>, endowed_accounts: Vec<
 		sudo: Some(SudoConfig {
 			key: root_key,
 		}),
+        // Democracy module requires a genesis config.
+        // We can see the fields necessary in srml/democracy/src/lib.rs in decl_module!
+
+        // Here's how they do it in the main node (node/cli/src/chain_spec.rs)
+        // democracy: Some(DemocracyConfig {
+		// 	launch_period: 10 * MINUTES,    // 1 day per public referendum
+		// 	voting_period: 10 * MINUTES,    // 3 days to discuss & vote on an active referendum
+		// 	minimum_deposit: 50 * DOLLARS,    // 12000 as the minimum deposit for a referendum
+		// 	public_delay: 10 * MINUTES,
+		// 	max_lock_periods: 6,
+		// }),
+
+        // Don't be scared by the CONSTANTS. They are just numbers (u128s or u64s).
+        democracy: Some(DemocracyConfig {
+            launch_period: 1,
+            voting_period: 2,
+            minimum_deposit: 3,
+            public_delay: 4,
+            max_lock_periods: 5,
+        }),
 	}
 }
