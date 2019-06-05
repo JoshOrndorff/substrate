@@ -404,4 +404,19 @@ mod tests {
 			let _ = Timestamp::dispatch(Call::set(46), Origin::NONE);
 		});
 	}
+
+    #[test]
+    #[should_panic(expected = "Timestamp must increment by at least <MinimumPeriod> between sequential blocks")]
+    fn rename() {
+        // t is the mock that we've setup
+        let mut t = system::GenesisConfig::<Test>::default().build_storage().unwrap().0;
+        t.extend(GenesisConfig::<Test> {
+            minimum_period: 6,
+        }.build_storage().unwrap().0);
+
+        with_externalities(&mut TestExternalities::new(t), || {
+            Timestamp::set_timestamp(42);
+            let _ = Timestamp::dispatch(Call::set(40), Origin::NONE);
+        })
+    }
 }
