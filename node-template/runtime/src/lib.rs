@@ -203,6 +203,21 @@ impl template::Trait<template::Instance2> for Runtime {
 	type Event = Event;
 }
 
+// Copying the collective stuff from the full node
+type CouncilInstance = collective::Instance1;
+impl collective::Trait<CouncilInstance> for Runtime {
+	type Origin = Origin;
+	type Proposal = Call;
+	type Event = Event;
+}
+
+type TechnicalInstance = collective::Instance2;
+impl collective::Trait<TechnicalInstance> for Runtime {
+	type Origin = Origin;
+	type Proposal = Call;
+	type Event = Event;
+}
+
 construct_runtime!(
 	pub enum Runtime where
 		Block = Block,
@@ -215,9 +230,14 @@ construct_runtime!(
 		Indices: indices::{default, Config<T>},
 		Balances: balances,
 		Sudo: sudo,
+
 		// Used for the module template in `./template.rs`
-		SecondCopy: template::<Instance2>::{Module, Call, Storage, Event<T>, Config},
-		TemplateModule: template::<Instance1>::{Module, Call, Storage, Event<T>, Config},
+		SecondCopy: template::<Instance2>::{Module, Call, Storage, Event<T>/*, Config<T>*/},
+		TemplateModule: template::<Instance1>::{Module, Call, Storage, Event<T>/*, Config<T>*/},
+
+		// Copying collective stuff from the full node
+		Council: collective::<Instance1>::{Module, Call, Storage, Origin<T>, Event<T>, Config<T>},
+		TechnicalCommittee: collective::<Instance2>::{Module, Call, Storage, Origin<T>, Event<T>, Config<T>},
 	}
 );
 

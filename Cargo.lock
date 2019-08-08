@@ -2426,6 +2426,7 @@ dependencies = [
  "sr-version 2.0.0",
  "srml-aura 2.0.0",
  "srml-balances 2.0.0",
+ "srml-collective 2.0.0",
  "srml-executive 2.0.0",
  "srml-indices 2.0.0",
  "srml-sudo 2.0.0",
