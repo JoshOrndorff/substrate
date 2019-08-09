@@ -129,3 +129,15 @@ fn testnet_genesis(initial_authorities: Vec<AuraId>, endowed_accounts: Vec<Accou
 		}),
 	}
 }
+
+
+#[test]
+fn test_genesis() {
+	use node_template_runtime::BuildStorage;
+	let c = testnet_genesis(Default::default(), Default::default(), Default::default());
+	let mut s = c.build_storage().unwrap();
+	sr_io::with_storage(&mut s.0, || {
+		assert_eq!(7, node_template_runtime::SecondCopy::something().unwrap());
+		assert_eq!(6, node_template_runtime::TemplateModule::something().unwrap());
+	});
+}
