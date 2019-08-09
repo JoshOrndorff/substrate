@@ -26,10 +26,13 @@ decl_storage! {
 		// Here we are declaring a StorageValue, `Something` as a Option<u32>
 		// `get(something)` is the default getter which returns either the stored `u32` or `None` if nothing stored
 		Something get(something) config(): Option<u32>;
-        //Bogus: Option<T::AccountId>;
+        // Bogus: Option<T::AccountId>; // The config is still not generic
+        // Bogus config(bogus): Option<T::AccountId>; // Now I need Config<T>
 	}
 	// add_extra_genesis {
 	// // error[E0412]: cannot find type `I` in this scope
+    // // Probably with a generic config, I won't get this error
+    // // TODO try that
 	// 	config(phantom): rstd::marker::PhantomData<I>;
 	// }
 }
