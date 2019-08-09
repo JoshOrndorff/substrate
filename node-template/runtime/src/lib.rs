@@ -232,8 +232,8 @@ construct_runtime!(
 		Sudo: sudo,
 
 		// Used for the module template in `./template.rs`
-		SecondCopy: template::<Instance2>::{Module, Call, Storage, Event<T>/*, Config<T>*/},
-		TemplateModule: template::<Instance1>::{Module, Call, Storage, Event<T>/*, Config<T>*/},
+		SecondCopy: template::<Instance2>::{Module, Call, Storage, Event<T>, Config},
+		TemplateModule: template::<Instance1>::{Module, Call, Storage, Event<T>, Config},
 
 		// Copying collective stuff from the full node
 		Council: collective::<Instance1>::{Module, Call, Storage, Origin<T>, Event<T>, Config<T>},

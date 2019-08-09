@@ -25,8 +25,8 @@ decl_storage! {
 		// Just a dummy storage item.
 		// Here we are declaring a StorageValue, `Something` as a Option<u32>
 		// `get(something)` is the default getter which returns either the stored `u32` or `None` if nothing stored
-		Something get(something) /*config()*/: Option<u32>;
-        Bogus: Option<T::AccountId>;
+		Something get(something) config(): Option<u32>;
+        //Bogus: Option<T::AccountId>;
 	}
 	// add_extra_genesis {
 	// // error[E0412]: cannot find type `I` in this scope

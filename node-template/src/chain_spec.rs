@@ -2,8 +2,8 @@ use primitives::{ed25519, sr25519, Pair};
 use node_template_runtime::{
 	AccountId, GenesisConfig, AuraConfig, BalancesConfig,
 	SudoConfig, IndicesConfig, SystemConfig, WASM_BINARY, AuraId};
-// use node_template_runtime::TemplateModuleConfig;
-// use node_template_runtime::SecondCopyConfig;
+use node_template_runtime::TemplateModuleConfig;
+use node_template_runtime::SecondCopyConfig;
 use node_template_runtime::CouncilConfig;
 use node_template_runtime::TechnicalCommitteeConfig;
 
@@ -111,20 +111,20 @@ fn testnet_genesis(initial_authorities: Vec<AuraId>, endowed_accounts: Vec<Accou
 		sudo: Some(SudoConfig {
 			key: root_key,
 		}),
-		// template_Instance2: Some(SecondCopyConfig {
-		// 	something: 7,
-		// 	phantom: Default::default(),
-		// }),
-		// template_Instance1: Some(TemplateModuleConfig {
-		// 	something: 6,
-		// 	phantom: Default::default(),
-		// }),
+		template_Instance2: Some(SecondCopyConfig {
+			something: 7,
+		//	phantom: Default::default(),
+		}),
+		template_Instance1: Some(TemplateModuleConfig {
+			something: 6,
+		//	phantom: Default::default(),
+		}),
         collective_Instance1: Some(CouncilConfig {
-			members: vec![],
+			members: vec![account_key("Alice")],
 			phantom: Default::default(),
 		}),
 		collective_Instance2: Some(TechnicalCommitteeConfig {
-			members: vec![],
+			members: vec![account_key("Bob")],
 			phantom: Default::default(),
 		}),
 	}
