@@ -2496,6 +2496,7 @@ dependencies = [
  "sr-version 2.0.0",
  "srml-babe 2.0.0",
  "srml-balances 2.0.0",
+ "srml-collective 2.0.0",
  "srml-executive 2.0.0",
  "srml-grandpa 2.0.0",
  "srml-indices 2.0.0",

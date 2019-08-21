@@ -1,7 +1,7 @@
 use primitives::{Pair, Public};
 use node_template_runtime::{
 	AccountId, BabeConfig, BalancesConfig, GenesisConfig, GrandpaConfig,
-	/*SudoConfig,*/ IndicesConfig, SystemConfig, WASM_BINARY,
+	/*SudoConfig,*/ CollectiveConfig, IndicesConfig, SystemConfig, WASM_BINARY,
 };
 use babe_primitives::{AuthorityId as BabeId};
 use grandpa_primitives::{AuthorityId as GrandpaId};
@@ -121,6 +121,10 @@ fn testnet_genesis(initial_authorities: Vec<(AccountId, AccountId, GrandpaId, Ba
 		balances: Some(BalancesConfig {
 			balances: endowed_accounts.iter().cloned().map(|k|(k, 1 << 60)).collect(),
 			vesting: vec![],
+		}),
+		collective: Some(CollectiveConfig {
+			members: vec![],
+			phantom: Default::default(),
 		}),
 		// sudo: Some(SudoConfig {
 		// 	key: root_key,

@@ -247,6 +247,12 @@ impl balances::Trait for Runtime {
 	type WeightToFee = ConvertInto;
 }
 
+impl collective::Trait for Runtime {
+	type Origin = Origin;
+	type Proposal = Call;
+	type Event = Event;
+}
+
 // impl sudo::Trait for Runtime {
 // 	type Event = Event;
 // 	type Proposal = Call;
@@ -269,6 +275,7 @@ construct_runtime!(
 		Grandpa: grandpa::{Module, Call, Storage, Config, Event},
 		Indices: indices::{default, Config<T>},
 		Balances: balances,
+        Collective: collective::{Module, Call, Storage, Origin<T>, Event<T>, Config<T>},
 		//Sudo: sudo,
 		// Used for the module template in `./template.rs`
 		//TemplateModule: template::{Module, Call, Storage, Event<T>},

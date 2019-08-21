@@ -23,6 +23,7 @@ grandpa = { package = "srml-grandpa", path = "../../srml/grandpa", default-featu
 system = { package = "srml-system", path = "../../srml/system", default_features = false }
 timestamp = { package = "srml-timestamp", path = "../../srml/timestamp", default_features = false }
 #sudo = { package = "srml-sudo", path = "../../srml/sudo", default_features = false }
+collective = { package = "srml-collective", path = "../../srml/collective", default_features = false }
 sr-primitives = { path = "../../core/sr-primitives", default_features = false }
 client = { package = "substrate-client", path = "../../core/client", default_features = false }
 offchain-primitives = { package = "substrate-offchain-primitives", path = "../../core/offchain/primitives", default-features = false }
@@ -49,6 +50,7 @@ std = [
 	"system/std",
 	"timestamp/std",
 	#"sudo/std",
+  "collective/std",
 	"version/std",
 	"serde",
 	"safe-mix/std",
