@@ -253,10 +253,10 @@ impl collective::Trait for Runtime {
 	type Event = Event;
 }
 
-// impl sudo::Trait for Runtime {
-// 	type Event = Event;
-// 	type Proposal = Call;
-// }
+impl sudo::Trait for Runtime {
+	type Event = Event;
+	type Proposal = Call;
+}
 
 /// Used for the module template in `./template.rs`
 // impl template::Trait for Runtime {
@@ -276,7 +276,7 @@ construct_runtime!(
 		Indices: indices::{default, Config<T>},
 		Balances: balances,
         Collective: collective::{Module, Call, Storage, Origin<T>, Event<T>, Config<T>},
-		//Sudo: sudo,
+		Sudo: sudo,
 		// Used for the module template in `./template.rs`
 		//TemplateModule: template::{Module, Call, Storage, Event<T>},
 	}

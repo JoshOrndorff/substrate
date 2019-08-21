@@ -22,7 +22,7 @@ indices = { package = "srml-indices", path = "../../srml/indices", default_featu
 grandpa = { package = "srml-grandpa", path = "../../srml/grandpa", default-features = false }
 system = { package = "srml-system", path = "../../srml/system", default_features = false }
 timestamp = { package = "srml-timestamp", path = "../../srml/timestamp", default_features = false }
-#sudo = { package = "srml-sudo", path = "../../srml/sudo", default_features = false }
+sudo = { package = "srml-sudo", path = "../../srml/sudo", default_features = false }
 collective = { package = "srml-collective", path = "../../srml/collective", default_features = false }
 sr-primitives = { path = "../../core/sr-primitives", default_features = false }
 client = { package = "substrate-client", path = "../../core/client", default_features = false }
@@ -49,7 +49,7 @@ std = [
 	"sr-primitives/std",
 	"system/std",
 	"timestamp/std",
-	#"sudo/std",
+	"sudo/std",
   "collective/std",
 	"version/std",
 	"serde",

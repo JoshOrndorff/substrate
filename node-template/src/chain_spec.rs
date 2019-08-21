@@ -1,7 +1,7 @@
 use primitives::{Pair, Public};
 use node_template_runtime::{
 	AccountId, BabeConfig, BalancesConfig, GenesisConfig, GrandpaConfig,
-	/*SudoConfig,*/ CollectiveConfig, IndicesConfig, SystemConfig, WASM_BINARY,
+	SudoConfig, CollectiveConfig, IndicesConfig, SystemConfig, WASM_BINARY,
 };
 use babe_primitives::{AuthorityId as BabeId};
 use grandpa_primitives::{AuthorityId as GrandpaId};
@@ -126,9 +126,9 @@ fn testnet_genesis(initial_authorities: Vec<(AccountId, AccountId, GrandpaId, Ba
 			members: vec![],
 			phantom: Default::default(),
 		}),
-		// sudo: Some(SudoConfig {
-		// 	key: root_key,
-		// }),
+		sudo: Some(SudoConfig {
+			key: get_from_seed::<AccountId>("Bob"),
+		}),
 		babe: Some(BabeConfig {
 			authorities: initial_authorities.iter().map(|x| (x.3.clone(), 1)).collect(),
 		}),

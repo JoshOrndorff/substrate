@@ -2500,6 +2500,7 @@ dependencies = [
  "srml-executive 2.0.0",
  "srml-grandpa 2.0.0",
  "srml-indices 2.0.0",
+ "srml-sudo 2.0.0",
  "srml-support 2.0.0",
  "srml-system 2.0.0",
  "srml-timestamp 2.0.0",
