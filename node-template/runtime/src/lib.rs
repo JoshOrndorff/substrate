@@ -61,8 +61,9 @@ pub type Hash = primitives::H256;
 /// Digest item type.
 pub type DigestItem = generic::DigestItem<Hash>;
 
-/// Used for the module template in `./template.rs`
-mod template;
+/// Used for the experimentation modules
+// mod boxedint;
+mod conslist;
 
 /// Opaque types. These are used by the CLI to instantiate machinery that don't need to know
 /// the specifics of the runtime. They can then be made to be agnostic over specific formats
@@ -251,8 +252,12 @@ impl sudo::Trait for Runtime {
 	type Proposal = Call;
 }
 
-/// Used for the module template in `./template.rs`
-impl template::Trait for Runtime {
+/// Used for the experimentation modules
+// impl template::Trait for Runtime {
+// 	type Event = Event;
+// }
+
+impl conslist::Trait for Runtime {
 	type Event = Event;
 }
 
@@ -269,8 +274,9 @@ construct_runtime!(
 		Indices: indices::{default, Config<T>},
 		Balances: balances::{default, Error},
 		Sudo: sudo,
-		// Used for the module template in `./template.rs`
-		TemplateModule: template::{Module, Call, Storage, Event<T>},
+		// Used for the experimentation modules
+		// TemplateModule: template::{Module, Call, Storage, Event<T>},
+		ConsList: conslist::{Module, Call, Storage, Event<T>},
 	}
 );
 

@@ -11,6 +11,7 @@
 use support::{decl_module, decl_storage, decl_event, StorageValue, dispatch::Result};
 use system::ensure_signed;
 use rstd::boxed::Box;
+use codec::{ Encode, Decode };
 
 /// The module's configuration trait.
 pub trait Trait: system::Trait {
@@ -20,30 +21,32 @@ pub trait Trait: system::Trait {
 	type Event: From<Event<Self>> + Into<<Self as system::Trait>::Event>;
 }
 
-{
-    "Cons": {
-        "head": "u64",
-        "tail": "ConsList",
-    },
-    "ConsList": {
-        "_enum": {
-            "End": null,
-            "Cons": "Cons"
-        }
-    }
-}
+// Type definitions for polkadot-js API
+// {
+//     "Cons": {
+//         "head": "u64",
+//         "tail": "ConsList"
+//     },
+//     "ConsList": {
+//         "_enum": {
+//             "End": null,
+//             "Cons": "Cons"
+//         }
+//     }
+// }
 
-pub struct ConsList {
+#[derive(PartialEq, Eq, Clone, Encode, Decode, Debug)]
+pub enum ConsList {
     End,
     Cons {
         head: u64,
-        tail: Box<ConsList>),
+        tail: Box<ConsList>,
     }
 }
 
 impl Default for ConsList {
     fn default() -> Self {
-        Self::Empty
+        Self::End
     }
 }
 
@@ -74,7 +77,7 @@ decl_module! {
 
 			// TODO: Code to execute when something calls this.
 			// For example: the following line stores the passed in u32 in the storage
-			Something::put(something);
+			Something::put(&something);
 
 			// here we are raising the Something event
 			Self::deposit_event(RawEvent::SomethingStored(something, who));
