@@ -20,7 +20,32 @@ pub trait Trait: system::Trait {
 	type Event: From<Event<Self>> + Into<<Self as system::Trait>::Event>;
 }
 
-type BoxedInt = Box<u64>;
+{
+    "Cons": {
+        "head": "u64",
+        "tail": "ConsList",
+    },
+    "ConsList": {
+        "_enum": {
+            "End": null,
+            "Cons": "Cons"
+        }
+    }
+}
+
+pub struct ConsList {
+    End,
+    Cons {
+        head: u64,
+        tail: Box<ConsList>),
+    }
+}
+
+impl Default for ConsList {
+    fn default() -> Self {
+        Self::Empty
+    }
+}
 
 // This module's storage items.
 decl_storage! {
@@ -28,7 +53,7 @@ decl_storage! {
 		// Just a dummy storage item.
 		// Here we are declaring a StorageValue, `Something` as a Option<u32>
 		// `get(something)` is the default getter which returns either the stored `u32` or `None` if nothing stored
-		Something get(something): BoxedInt;
+		Something get(something): ConsList;
 	}
 }
 
@@ -43,13 +68,13 @@ decl_module! {
 		// Just a dummy entry point.
 		// function that can be called by the external world as an extrinsics call
 		// takes a parameter of the type `AccountId`, stores it and emits an event
-		pub fn do_something(origin, something: BoxedInt) -> Result {
+		pub fn do_something(origin, something: ConsList) -> Result {
 			// TODO: You only need this if you want to check it was signed.
 			let who = ensure_signed(origin)?;
 
 			// TODO: Code to execute when something calls this.
 			// For example: the following line stores the passed in u32 in the storage
-			Something::put(something.clone());
+			Something::put(something);
 
 			// here we are raising the Something event
 			Self::deposit_event(RawEvent::SomethingStored(something, who));
@@ -63,7 +88,7 @@ decl_event!(
 		// Just a dummy event.
 		// Event `Something` is declared with a parameter of the type `u32` and `AccountId`
 		// To emit this event, we call the deposit funtion, from our runtime funtions
-		SomethingStored(BoxedInt, AccountId),
+		SomethingStored(ConsList, AccountId),
 	}
 );
 
@@ -124,13 +149,13 @@ mod tests {
 	}
 
 	#[test]
-	fn it_works_for_default_value() {
+	fn it_works_for_empty() {
 		with_externalities(&mut new_test_ext(), || {
 			// Just a dummy test for the dummy funtion `do_something`
-			// calling the `do_something` function with a value 42
-			assert_ok!(TemplateModule::do_something(Origin::signed(1), Box::new(42)));
+			// calling the `do_something` function with a value Empty
+			assert_ok!(TemplateModule::do_something(Origin::signed(1), ConsList::Empty));
 			// asserting that the stored value is equal to what we stored
-			assert_eq!(TemplateModule::something(), Box::new(42));
+			assert_eq!(TemplateModule::something(), ConsList::Empty);
 		});
 	}
 }
