@@ -63,14 +63,21 @@ decl_module! {
 // 	}
 // );
 
-impl<T: Trait> OnSessionEnding<T::AccountId> for Module<T> {
-	fn on_session_ending(_ending_index: SessionIndex, _will_apply_at: SessionIndex) -> Option<Vec<T::AccountId>> {
+impl<T: Trait> OnSessionEnding<T::ValidatorId> for Module<T> {
+	fn on_session_ending(_ending_index: SessionIndex, _will_apply_at: SessionIndex) -> Option<Vec<T::ValidatorId>> {
 		match <QueuedValidator<T>>::get() {
 			Some(n00b) => {
 				// Get the list of current validators from the session module
 				let mut validators = session::Module::<T>::validators();
+
+				// Add the new validator to the list
 				validators.push(T::ValidatorIdOf::convert(n00b.clone()).unwrap());
-				Some(validators.into())
+
+				// Clear the queued validator from local storage
+				<QueuedValidator<T>>::kill();
+
+				// Return the vector of new validators
+				Some(validators)
 			}
 			None => None
 		}
