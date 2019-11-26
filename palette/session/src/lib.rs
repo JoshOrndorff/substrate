@@ -480,7 +480,7 @@ decl_module! {
 		fn set_keys(origin, keys: T::Keys, proof: Vec<u8>) -> Result {
 			let who = ensure_signed(origin)?;
 
-			ensure!(keys.ownership_proof_is_valid(&proof), "invalid ownership proof");
+			//ensure!(keys.ownership_proof_is_valid(&proof), "invalid ownership proof");
 
 			let who = match T::ValidatorIdOf::convert(who) {
 				Some(val_id) => val_id,
