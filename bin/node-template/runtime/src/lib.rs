@@ -22,6 +22,7 @@ use pallet_grandpa::fg_primitives;
 use sp_version::RuntimeVersion;
 #[cfg(feature = "std")]
 use sp_version::NativeVersion;
+use template::MyStruct;
 
 // A few exports that help ease life for downstream crates.
 #[cfg(any(feature = "std", test))]

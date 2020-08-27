@@ -7,10 +7,10 @@
 use frame_support::{decl_module, decl_storage, decl_event, decl_error, dispatch, traits::Get};
 use frame_system::ensure_signed;
 use frame_support::traits::Vec;
-
+use codec::{Encode, Decode};
 
 #[cfg(feature = "std")]
-use serde::{Serialize, Deserialize};
+use frame_support::serde::{Serialize, Deserialize};
 
 #[cfg(test)]
 mod mock;
@@ -18,8 +18,8 @@ mod mock;
 #[cfg(test)]
 mod tests;
 
-#[derive(Clone, PartialEq)]
-#[cfg_attr(feature = "std", derive(Debug, Serialize, Deserialize))]
+#[derive(Clone, PartialEq, Encode, Decode,)]
+// #[cfg_attr(feature = "std", derive(Debug, Serialize, Deserialize))]
 pub struct MyStruct<U> {
 	field: U,
 	desc: Vec<u8>,
