@@ -6,12 +6,24 @@
 
 use frame_support::{decl_module, decl_storage, decl_event, decl_error, dispatch, traits::Get};
 use frame_system::ensure_signed;
+use frame_support::traits::Vec;
+
+
+#[cfg(feature = "std")]
+use serde::{Serialize, Deserialize};
 
 #[cfg(test)]
 mod mock;
 
 #[cfg(test)]
 mod tests;
+
+#[derive(Clone, PartialEq)]
+#[cfg_attr(feature = "std", derive(Debug, Serialize, Deserialize))]
+pub struct MyStruct<U> {
+	field: U,
+	desc: Vec<u8>,
+}
 
 /// Configure the pallet by specifying the parameters and types on which it depends.
 pub trait Trait: frame_system::Trait {
@@ -29,6 +41,9 @@ decl_storage! {
 		// Learn more about declaring storage items:
 		// https://substrate.dev/docs/en/knowledgebase/runtime/storage#declaring-storage-items
 		Something get(fn something): Option<u32>;
+
+		StructMap get(fn get_details): map hasher(blake2_128_concat)
+				Vec<u8> => Option<MyStruct<T::AccountId>>;
 	}
 }
 

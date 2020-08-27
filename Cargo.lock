@@ -4997,6 +4997,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "pallet-template-rpc"
+version = "2.0.0"
+dependencies = [
+ "jsonrpc-core",
+ "jsonrpc-core-client",
+ "jsonrpc-derive",
+ "pallet-template",
+ "parity-scale-codec",
+ "serde",
+ "sp-api",
+ "sp-blockchain",
+ "sp-core",
+ "sp-rpc",
+ "sp-runtime",
+ "template-rpc-runtime-api",
+]
+
+[[package]]
 name = "pallet-timestamp"
 version = "2.0.0-rc6"
 dependencies = [
@@ -8947,6 +8965,22 @@ dependencies = [
  "redox_syscall",
  "remove_dir_all",
  "winapi 0.3.9",
+]
+
+[[package]]
+name = "template-rpc-runtime-api"
+version = "2.0.0"
+dependencies = [
+ "frame-support",
+ "pallet-template",
+ "parity-scale-codec",
+ "serde",
+ "serde_json",
+ "sp-api",
+ "sp-application-crypto",
+ "sp-core",
+ "sp-runtime",
+ "sp-std",
 ]
 
 [[package]]

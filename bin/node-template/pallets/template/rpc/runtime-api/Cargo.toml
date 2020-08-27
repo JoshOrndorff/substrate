@@ -1,0 +1,31 @@
+[package]
+name = "template-rpc-runtime-api"
+version = "2.0.0"
+authors = ["Parity Technologies <admin@parity.io>"]
+edition = "2018"
+
+[dependencies]
+app-crypto = { package = "sp-application-crypto", path = "../../../../../../primitives/application-crypto", default-features = false }
+serde = { version = "1.0.110", optional = true, features = ["derive"] }
+sp-api = { version = "2.0.0-rc4", default-features = false, path = "../../../../../../primitives/api" }
+sp-core = { package = "sp-core", path = "../../../../../../primitives/core", default-features = false }
+codec = { package = "parity-scale-codec", version = "1.0.6", default-features = false, features = ["derive"] }
+sp-std = { version = "2.0.0-rc4", default-features = false, path = "../../../../../../primitives/std" }
+sp-runtime = { version = "2.0.0-rc4", default-features = false, path = "../../../../../../primitives/runtime" }
+frame-support = { version = "2.0.0-rc4", default-features = false, path = "../../../../../../frame/support" }
+pallet-template = { version = "2.0.0-rc4", default-features = false, path = "../.." }
+
+[dev-dependencies]
+serde_json = "1.0.41"
+
+[features]
+default = ["std"]
+std = [
+	"serde",
+	"sp-api/std",
+	"codec/std",
+	"sp-std/std",
+	"sp-runtime/std",
+	"frame-support/std",
+	"pallet-template/std",
+]
